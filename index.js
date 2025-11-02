@@ -78,7 +78,7 @@ async function connector(Num, res) {
         ),
       },
       logger: pino({ level: "fatal" }),
-      browser: Browsers.macOS("Arc"),
+      browser: Browsers.macOS("Edge"),
       printQRInTerminal: false,
     });
 
