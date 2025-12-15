@@ -13,22 +13,26 @@ function toBool(v) {
   return Boolean(v);
 }
 
-/**
- * Helper to read current runtime values (global)
- * Keys used:
- *  - prefix
- *  - MENU_URL
- *  - BOT_NAME
- *  - WORK_TYPE
- */
-function readRuntimeSettings() {
-  return {
-    prefix: settings.getGlobal("prefix") ?? config.prefix,
-    MENU_URL: settings.getGlobal("MENU_URL") ?? config.MENU_URL ?? null,
-    BOT_NAME: settings.getGlobal("BOT_NAME") ?? (config.THEME || "Bot"),
-    WORK_TYPE: settings.getGlobal("WORK_TYPE") ?? config.WORK_TYPE ?? "public",
-  };
-}
+
+/* ---------------- .setmenu <url> ---------------- */
+Module({
+  command: "setmenu",
+  package: "owner",
+  description: "Set menu info (.setmenu name,https://photo.jpg,image/video/gif"
+})(async (message, match) => {
+  if (!message.isFromMe) return message.send(theme.isfromMe);
+  const info = (match || "").trim();
+  if (!info) return message.send("Usage: .setmenu name,https://photo.jpg,image/video/gif");
+  try {
+    await settings.setGlobal("MENU_INFO", info, { persist: true });
+    await message.react?.("✅");
+    return await message.send("✅ menu info saved.");
+  } catch (err) {
+    console.error("setimg error:", err);
+    await message.react?.("❌");
+    return await message.send("❌ Failed to save menu info.");
+  }
+});
 
 /* ---------------- .setimg <url> ---------------- */
 Module({

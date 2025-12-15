@@ -1,5 +1,5 @@
 // lib/warn.js
-const settings = require("./database/settingsdb");
+const settings = require("../../lib/database/settingdb");
 
 async function getGroupWarnData(groupJid) {
   let data = await settings.getGroup(groupJid, "warn");

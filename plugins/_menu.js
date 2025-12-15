@@ -5,11 +5,7 @@ const theme = getTheme();
 const settings = require("../lib/database/settingdb");
 const { getRandomPhoto } = require("./bin/menu_img");
 const config = require("../config");
-const TextStyles = require("../lib/textfonts");
-const styles = new TextStyles();
-
 const name = "X-kira ━ 𝐁𝕺𝐓";
-
 const runtime = (secs) => {
   const pad = (s) => s.toString().padStart(2, "0");
   const h = Math.floor(secs / 3600);
@@ -17,7 +13,6 @@ const runtime = (secs) => {
   const s = Math.floor(secs % 60);
   return `${pad(h)}h ${pad(m)}m ${pad(s)}s`;
 };
-
 const readMore = String.fromCharCode(8206).repeat(4001);
 
 Module({
@@ -33,7 +28,6 @@ Module({
   const usedGB = ((os.totalmem() - os.freemem()) / 1073741824).toFixed(2);
   const totGB = (os.totalmem() / 1073741824).toFixed(2);
   const ram = `${usedGB} / ${totGB} GB`;
-
   const grouped = commands
     .filter((cmd) => cmd.command && cmd.command !== "undefined")
     .reduce((acc, cmd) => {
@@ -41,22 +35,23 @@ Module({
       acc[cmd.package].push(cmd.command);
       return acc;
     }, {});
-
   const workType =
     settings.getGlobal("WORK_TYPE") ??
     config.WORK_TYPE ??
     "public";
-
   const prefix =
     settings.getGlobal("prefix") ??
     config.prefix ??
     ".";
-
+      const menuInfo =
+    settings.getGlobal("MENU_INFO") ??
+    config.MENU_INFO ??
+    "bot,https://i.postimg.cc/pVZd1X4L/DM-FOR-PAID-PROMOTION-B-o-y-P-F-P-𝐼𝐺-3.webp,photo";
+  const [name, media, type] = menuInfo.split(',').map(v => v.trim());
   const categories = Object.keys(grouped).sort();
   let _cmd_st = "";
 
   if (match && grouped[match.toLowerCase()]) {
-    // Single package view
     const pack = match.toLowerCase();
     _cmd_st += `\n *╭────❒ ${pack.toUpperCase()} ❒⁠⁠⁠⁠*\n`;
     grouped[pack]
@@ -66,7 +61,6 @@ Module({
       });
     _cmd_st += ` *┕──────────────────❒*\n`;
   } else {
-    // Main menu
     _cmd_st += `
 *╭══〘〘 ${name} 〙〙*
 *┃❍ ʀᴜɴ     :* ${runtime(process.uptime())}
@@ -79,7 +73,6 @@ Module({
 ${readMore}
 *♡︎•━━━━━━☻︎━━━━━━•♡︎*
 `;
-
     if (match && !grouped[match.toLowerCase()]) {
       _cmd_st += `\n⚠️ *Package not found: ${match}*\n\n`;
       _cmd_st += `*Available Packages*:\n`;
@@ -87,7 +80,6 @@ ${readMore}
         _cmd_st += `├◈ ${cat}\n`;
       });
     } else {
-      // All categories
       for (const cat of categories) {
         _cmd_st += `\n *╭────❒ ${cat.toUpperCase()} ❒⁠⁠⁠⁠*\n`;
         grouped[cat]
@@ -98,34 +90,27 @@ ${readMore}
         _cmd_st += ` *┕──────────────────❒*\n`;
       }
     }
-
-    _cmd_st += `\n💖 *~_Made with love by X-kira_~*`;
+    _cmd_st += `\nᴛʜᴇ ʜᴇᴀʀᴛ ʜᴀᴄᴋᴇʀ ɢɪʀʟ
+   𐏓꯭꯭❀𝄄𝄀꯭𝄄꯭ 𝐙͟𝐚͟𝐫͟𝐢͟𝐬͟𝐡͟𝐚͟❀͟𝄄𝄀꯭𝄄꯭⸙⟶`;
   }
-  const channelJid = "120363400835083687@newsletter";
-  const channelName = "© X-kira";
-  const serverMessageId = 6;
-
-  const opts = {
-    image: {
-      url:
-        settings.getGlobal("MENU_URL") ||
-        config.MENU_URL ||
-        getRandomPhoto(),
-    },
-    caption: _cmd_st,
-    mimetype: "image/jpeg",
-    contextInfo: {
-      forwardingScore: 999,
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: channelJid,
-        newsletterName: channelName,
-        serverMessageId: serverMessageId,
-      },
-    },
-  };
-
-  await message.conn.sendMessage(message.from, opts);
+  if (type === "image") {
+    await message.conn.sendMessage(message.from, {
+      image: { url: media },
+      caption: _cmd_st,
+    });
+  } else if (type === "video") {
+    await message.conn.sendMessage(message.from, {
+      video: { url: media },
+      caption: _cmd_st,
+      gifPlayback: false
+    });
+  } else if (type === "gif") {
+    await message.conn.sendMessage(message.from, {
+      video: { url: media },
+      caption: _cmd_st,
+      gifPlayback: true
+    });
+  }
 });
 
 

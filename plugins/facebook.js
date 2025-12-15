@@ -1,4 +1,4 @@
-const { Module } = require('../lib/plugins');
+/*const { Module } = require('../lib/plugins');
 const Facebook = require('../lib/Class/facebook');
 const UrlUtil = require('../lib/UrlUtil');
 
@@ -39,3 +39,4 @@ Module({
     caption: `*Quality:* ${quality}`
   });
 });
+*/

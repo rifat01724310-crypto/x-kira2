@@ -1,5 +1,5 @@
 const { Module } = require("../lib/plugins");
-const warn = require("../lib/warn");
+const warn = require("./bin/warnlib");
 const theme = require("../Themes/themes").getTheme();
 
 Module({

@@ -1,7 +1,7 @@
 
 const { Module } = require("../lib/plugins");
 const settings = require("../lib/database/settingdb"); // adjust path if needed
-const warnlib = require("../lib/warn"); // must implement addWarn/removeWarn/setWarnLimit
+const warnlib = require("./bin/warnlib"); // must implement addWarn/removeWarn/setWarnLimit
 const { getTheme } = require("../Themes/themes");
 const theme = getTheme();
 
