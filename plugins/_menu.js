@@ -53,7 +53,7 @@ ${readMore}
 `;
       if (match && grouped[match.toLowerCase()]) {
         const pack = match.toLowerCase();
-        _cmd_st += `\n\`『 ${pack.toUpperCase()} 』\`\n╭──────────────────⊷\n`;
+        _cmd_st += `\`『 ${pack.toUpperCase()} 』\`\n╭──────────────────⊷\n`;
         grouped[pack]
           .sort((a, b) => a.localeCompare(b))
           .forEach((cmdName) => {
@@ -63,7 +63,7 @@ ${readMore}
         _cmd_st += `╰──────────────────⊷\n`;
       } else {
         for (const cat of categories) {
-          _cmd_st += `\n\`『 ${cat.toUpperCase()} 』\`\n╭──────────────────⊷\n`;
+          _cmd_st += `\`『 ${cat.toUpperCase()} 』\`\n╭──────────────────⊷\n`;
           const list = grouped[cat].slice().sort((a, b) => a.localeCompare(b));
           for (const cmdName of list) {
             const index = flatCmds.findIndex(x => x.command === cmdName && x.package === cat) + 1;
@@ -71,10 +71,7 @@ ${readMore}
           }
           _cmd_st += `╰──────────────────⊷\n`;
        }
-        _cmd_st += `\n═════ ✥.❖.✥ ═════
-ᴛʜᴇ ʜᴇᴀʀᴛ ʜᴀᴄᴋᴇʀ ɢɪʀʟ
-ㅤ𐏓꯭꯭❀𝄄𝄀꯭𝄄꯭ 𝐙͟𝐚͟𝐫͟𝐢͟𝐬͟𝐡͟𝐚͟❀͟𝄄𝄀꯭𝄄꯭⸙⟶
-═════ ✥.❖.✥ ═════`;
+        _cmd_st += `> *© ᴘσωєʀє∂ ву ѕтα፝֟꧊ꝛ̴͜ƙ м∂⎯꯭̽🚩*`;
       }
       _cmd_st += INVISIBLE_MARK;
 
