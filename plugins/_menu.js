@@ -41,43 +41,35 @@ Module({ command: "menu", package: "general", description: "Show all commands or
         for (const c of list) flatCmds.push({ package: cat, command: c });
       }
       let _cmd_st = "";
-      _cmd_st += `
-*╭══〘〘 ${name} 〙〙*
-*┃❍ ʀᴜɴ     :* ${runtime(process.uptime())}
-*┃❍ ᴍᴏᴅᴇ    :* ${workType}
-*┃❍ ᴘʀᴇғɪx  :* ${prefix}
-*┃❍ ʀᴀᴍ     :* ${ram}
-*┃❍ ᴛɪᴍᴇ    :* ${time}
-*┃❍ ᴜsᴇʀ    :* ${userName}
-*╰═════════════════⊷*
+      _cmd_st += `╭┈──〔 ${name} 〕┈──⊷
+│ 🏓 *ᴜᴘᴛɪᴍᴇ:* ${runtime(process.uptime())}
+│ 🫟 *ᴍᴏᴅᴇ:* ${workType}
+│ ⛲ *ᴘʟᴜɢɪɴs:* ${prefix}
+│ 🎐 *ʀᴀᴍ:* ${ram}
+│ 🎗️ *ᴛɪᴍᴇ:* ${time}
+│ 🇦🇱 *ᴜsᴇʀ:* ${userName}
+╰──────────────────⊷
 ${readMore}
-*♡︎•━━━━━━☻︎━━━━━━•♡︎*
-*┃❍ Reply with the number to execute the command.*
 `;
       if (match && grouped[match.toLowerCase()]) {
         const pack = match.toLowerCase();
-        _cmd_st += `\n *╭────❒ ${pack.toUpperCase()} ❒⁠⁠⁠⁠*\n`;
+        _cmd_st += `\n\`『 ${pack.toUpperCase()} 』\`\n╭──────────────────⊷\n`;
         grouped[pack]
           .sort((a, b) => a.localeCompare(b))
           .forEach((cmdName) => {
             const index = flatCmds.findIndex(x => x.command === cmdName && x.package === pack) + 1;
-            _cmd_st += ` *├◈ ${index} ${cmdName}*\n`;
+            _cmd_st += `*┋ ⬡ ${cmdName}*\n`;
           });
-        _cmd_st += ` *┕──────────────────❒*\n`;
+        _cmd_st += `╰──────────────────⊷\n`;
       } else {
         for (const cat of categories) {
-          _cmd_st += `\n *╭────❒ ${cat.toUpperCase()} ❒⁠⁠⁠⁠*\n`;
+          _cmd_st += `\n\`『 ${cat.toUpperCase()} 』\`\n╭──────────────────⊷\n`;
           const list = grouped[cat].slice().sort((a, b) => a.localeCompare(b));
           for (const cmdName of list) {
             const index = flatCmds.findIndex(x => x.command === cmdName && x.package === cat) + 1;
-            _cmd_st += ` *├◈ ${index} ${cmdName}*\n`;
+            _cmd_st += `*┋ ⬡ ${cmdName}*\n`;
           }
-          _cmd_st += ` *┕──────────────────❒*\n`;
-        }
-        _cmd_st += `\n═════ ✥.❖.✥ ═════
-ᴛʜᴇ ʜᴇᴀʀᴛ ʜᴀᴄᴋᴇʀ ɢɪʀʟ
-ㅤ𐏓꯭꯭❀𝄄𝄀꯭𝄄꯭ 𝐙͟𝐚͟𝐫͟𝐢͟𝐬͟𝐡͟𝐚͟❀͟𝄄𝄀꯭𝄄꯭⸙⟶
-═════ ✥.❖.✥ ═════`;
+          _cmd_st += `╰──────────────────⊷\n`;
       }
       _cmd_st += INVISIBLE_MARK;
 
@@ -243,3 +235,4 @@ Module({
 });
 
 
+        
