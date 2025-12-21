@@ -6,23 +6,20 @@ Module({
   description: "Replies with the bot latency",
 })(async (message) => {
   const start = Date.now();
+  const userName = message.pushName || "User";
   let gift = {
-    key: {
-      fromMe: false,
-      participant: `0@s.whatsapp.net`,
-      remoteJid: "status@broadcast",
-    },
-    message: {
-      contactMessage: {
-        displayName: message.pushName7,
-        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:'DEMON'\nitem1.TEL;waid=${
-          message.conn.user.id.split("@")[0]
-        }:${
-          message.conn.user.id.split("@")[0]
-        }\nitem1.X-ABLabel:Ponsel\nEND:VCARD`,
+      key: {
+        fromMe: false,
+        participant: "0@s.whatsapp.net",
+        remoteJid: "status@broadcast"
       },
-    },
-  };
+      message: {
+        contactMessage: {
+          displayName: `${userName}`,
+          vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:'STARK-MD'\nitem1.TEL;waid=${m.sender.split("@")[0]}:${m.sender.split("@")[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
+        }
+      }
+    };
   const emojis = [
     "⛅",
     "👻",
@@ -99,7 +96,7 @@ Module({
   await message.conn.sendMessage(
     message.from,
     {
-      text: `*${emoji} 𝐏๏፝֟ƞ̽g: ${latency} 𝐌sᷱ᪳*`,
+      text: `*${emoji}⧫𝔓⦿𝖓𝖌 ${latency} 𝖒ˢ*`,
       contextInfo: {
         mentionedJid: [message.sender],
         forwardingScore: 5,
