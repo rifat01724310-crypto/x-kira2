@@ -7,18 +7,22 @@ Module({
 })(async (message) => {
   const start = Date.now();
   let gift = {
-      key: {
-        fromMe: false,
-        participant: "0@s.whatsapp.net",
-        remoteJid: "status@broadcast"
+    key: {
+      fromMe: false,
+      participant: `0@s.whatsapp.net`,
+      remoteJid: "status@broadcast",
+    },
+    message: {
+      contactMessage: {
+        displayName: message.pushName7,
+        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:'DEMON'\nitem1.TEL;waid=${
+          message.conn.user.id.split("@")[0]
+        }:${
+          message.conn.user.id.split("@")[0]
+        }\nitem1.X-ABLabel:Ponsel\nEND:VCARD`,
       },
-      message: {
-        contactMessage: {
-          displayName: `STARK-MD`,
-          vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:'STARK-MD'\nitem1.TEL;waid=${m.sender.split("@")[0]}:${m.sender.split("@")[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
-        }
-      }
-    };
+    },
+  };
   const emojis = [
     "⛅",
     "👻",
