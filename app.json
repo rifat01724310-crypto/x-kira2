@@ -1,0 +1,49 @@
+{
+  "name": "STARK-MD",
+  "version": "7.0.0",
+  "description": "I am ALI MD, a Simple WhatsApp Bot built with NodeJs to Enhance WhatsApp Communication experience",
+  "website": "https://files.catbox.moe/ykdtkm.jpeg",
+  "logo": "https://files.catbox.moe/w3k9sq.jpg",
+  "keywords": ["STARK-MD", "Whatsapp bot", "Bot", "STARK-MD BOT"],
+  "repository": "https://github.com/ali-sain/x-kira",
+  "success_url": "/",
+  "stack": "container",
+  "env": {
+    "SESSION_ID": {
+      "description": "Put your Session STARK-MD~ID here",
+      "value": "",
+      "required": true
+    },
+    "MENU_INFO": {
+      "description": "Add multiple numbers with country code without (+), separated by comma",
+      "value": "x-kira,https://i.postimg.cc/TY3P8vv2/𝙎𝙒𝙄𝙋𝙀-𝙋𝙄𝘾𝙎-GC-link-in-bio-𝘿𝙈-𝙋𝘼𝙄𝘿-𝙁𝙊𝙍-𝙋𝙍𝙊𝙈𝙊𝙏𝙄𝙊𝙉-𝙅𝙊-1.webp,image",
+      "required": false
+    },
+    "WORK_TYPE": {
+      "description": "Bot mode: public, private, inbox, groups",
+      "value": "public",
+      "required": true
+    },
+   "BOT_NAME": {
+      "description": "Bot name display",
+      "value": "𓆩ု᪳𝐒𝐓𝐀𝐑𝐊-𝐌𝐃ှ᪳𓆪",
+      "required": true
+    },
+    "PREFIX": {
+      "description": "Command prefix",
+      "value": ".",
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
