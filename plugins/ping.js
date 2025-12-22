@@ -5,54 +5,52 @@ Module({
   package: "mics",
   description: "Replies with the bot latency",
 })(async (message) => {
-
   const start = Date.now();
-  const name = message.pushName || "User";
-  const number = message.sender.split("@")[0];
 
-  // ✅ vCard with USER NAME
-  const gift = {
+  let gift = {
     key: {
       fromMe: false,
-      remoteJid: message.from,
+      participant: "0@s.whatsapp.net",
+      remoteJid: "status@broadcast",
     },
     message: {
       contactMessage: {
-        displayName: name,
+        displayName: message.pushName || "User",
         vcard: `BEGIN:VCARD
 VERSION:3.0
-N:${name};;;;
-FN:${name}
-TEL;type=CELL;waid=${number}:${number}
+N:;Gifted;;;
+FN:Gifted
+item1.TEL;waid=${message.sender.split("@")[0]}:${message.sender.split("@")[0]}
+item1.X-ABLabel:Mobile
 END:VCARD`,
       },
     },
   };
 
   const emojis = [
-    "⛅","👻","⛄","👀","🪁","🪃","🎳","🎀","🌸",
-    "🍥","🍓","🍡","💗","🦋","💫","💀","☁️",
-    "🌨️","🌧️","🌦️","🌥️","⚡","🌟","🎐",
-    "🏖️","🌊","🐚","🍒","🍇","🍉","🌻",
-    "🎢","🚀","🍫","💎","🌙","🪐","🌲",
-    "🍃","🍂","🍁","🍄","🌿","🐞","🐍",
-    "🕊️","🎃","🎡","🥂","🗿","⛩️"
+    "⛅","👻","⛄","👀","🪁","🎳","🌸","🍓","💗",
+    "🦋","⚡","🌟","🏖️","🌊","🍒","🌻","🚀",
+    "💎","🌙","🪐","🌲","🍂","🕊️","🎃","🥂","🗿"
   ];
 
   const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-  await message.react(emoji);
+
+  try {
+    await message.react(emoji);
+  } catch {}
 
   const latency = Date.now() - start;
 
   await message.conn.sendMessage(
     message.from,
     {
-      text: `*${emoji} ⧫ 𝔓⦿𝖓𝖌 ${latency} 𝖒ˢ*`,
+      text: `*${emoji} ⧫𝔓⦿𝖓𝖌 ${latency} ms*`,
       contextInfo: {
         mentionedJid: [message.sender],
+        forwardingScore: 5,
+        isForwarded: false,
       },
     },
     { quoted: gift }
   );
-
 });
